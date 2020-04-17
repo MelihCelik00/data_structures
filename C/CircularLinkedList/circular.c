@@ -47,7 +47,7 @@ node * addSorted(node * r,int x){
         return temp;
     }
     node * iter = r;
-    while(iter-> next != NULL && iter->next-> x < x){
+    while(iter-> next != r && iter->next-> x < x){
         iter = iter->next;
     }
     
