@@ -91,14 +91,4 @@ int main(){
     printer(root);
     root = deleteNode(root,450);
     printer(root);
-    
-    printer(root);
-    node * iter = root;
-    for(int i=0;i<3;i++)
-        iter = iter -> next;
-    node * temp = (node *)malloc(sizeof(node));
-    temp -> next = iter ->next;
-    iter -> next = temp;
-    temp -> x = 100;
-    printer(root);
 }
