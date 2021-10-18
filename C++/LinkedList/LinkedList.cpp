@@ -6,7 +6,18 @@ class Node
         int data;
         Node* next;
 };
+/* class with a constructor
+class Node {
+    public:
+        int data;
+        Node* next;
 
+        Node(int node_data) {
+            this->data = node_data;
+            this->next = nullptr;
+        }
+};
+*/
 Node* head; // global variable, can be accessed anywhere
 Node* InsertNodeAtBeginning(Node* head,int x) // defined return type, trying different implementations
 {
