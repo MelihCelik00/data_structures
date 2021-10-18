@@ -28,6 +28,7 @@ int main()
     while(temp1 -> link != NULL)
     {
         temp1= temp1->link;
+        std::cout << "temp1: " << temp1 << std::endl; 
     }
     temp1->link = temp;
 
