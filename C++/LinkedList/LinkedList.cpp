@@ -1,10 +1,11 @@
 #include <iostream>
 
 
-struct Node 
+class Node 
 {
-    int data;
-    Node* link;
+    public:
+        int data;
+        Node* link;
 }
 
 int main()
