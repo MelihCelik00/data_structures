@@ -1,35 +1,47 @@
 #include <iostream>
 
-
 class Node 
 {
     public:
         int data;
-        Node* link;
+        Node* next;
+};
+
+//Node* head; // global variable, can be accessed anywhere
+Node* InsertNodeAtBeginning(Node* head,int x)
+{
+    Node* temp = new Node();
+    temp -> data = x;
+    temp -> next = NULL;
+    if (head != NULL) temp -> next = head;
+    head = temp;
+    return head;
+}
+
+void Print(Node* head)
+{
+    //Node* temp = head; // if printing a global variable, a new declaration must be done here to prevent ruining the global variable
+    std::cout << "The list is: ";
+    while (head != NULL)
+    {
+        std::cout << head->data << " ";
+        head = head -> next;
+    }
+    std::cout << "\n";
 }
 
 int main()
 {
-    Node* A;
-    A = NULL;
-
-    Node* temp = new Node();
-
-    temp -> data = 2;
-    temp -> link = NULL;
-
-    A = temp;
-
-    temp = new Node();
-    temp -> data = 4;
-    temp -> link = NULL;
-
-    Node* temp1 = A;
-    while(temp1 -> link != NULL)
+    Node* head = NULL; // local variable, must be passed as referance
+    std::cout << "\nHow many numbers? " << std::endl;
+    int n, x;
+    std::cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        temp1= temp1->link;
-        std::cout << "temp1: " << temp1 << std::endl; 
+        std::cout << "Enter the number: ";
+        std::cin >> x;
+        head = InsertNodeAtBeginning(head, x);
     }
-    temp1->link = temp;
-
+    Print(head);
+    
 }
