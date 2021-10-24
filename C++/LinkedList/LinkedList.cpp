@@ -18,7 +18,7 @@ class Node {
         }
 };
 */
-Node* head; // global variable, can be accessed anywhere
+//Node* head; // global variable, can be accessed anywhere
 Node* InsertNodeAtBeginning(Node* head,int x) // defined return type, trying different implementations
 {
     Node* temp = new Node();
@@ -29,7 +29,7 @@ Node* InsertNodeAtBeginning(Node* head,int x) // defined return type, trying dif
     return head;
 }
 
-void InsertNodeAtNthPosition(int data, int n)
+Node* InsertNodeAtNthPosition(Node* head, int data, int n)
 {
     Node* temp1 = new Node();
     temp1 -> data = data;
@@ -37,8 +37,7 @@ void InsertNodeAtNthPosition(int data, int n)
     if (n==1) { // Special Case(1st Position): implementation is like InsertNodeAtBeginning method
         temp1->next = head;
         head = temp1;
-        return;
-        //return head;
+        return head;
     }
     Node* temp2 = head;
     for (int i = 0; i < n-2; i++){
@@ -46,9 +45,10 @@ void InsertNodeAtNthPosition(int data, int n)
     }
     temp1 -> next = temp2 -> next;
     temp2 -> next = temp1;
+    return head;
 }
 
-void InsertNodeAtTheEnd(int data)
+Node* InsertNodeAtTheEnd(Node* head, int data)
 {
     Node* temp1 = new Node(); // define temporary node as usual
     temp1 -> data = data;
@@ -61,15 +61,16 @@ void InsertNodeAtTheEnd(int data)
         }
         temp2 -> next = temp1;
     }
+    return head;
 }
 
-void DeleteNode(int n) // Delete node at position n
+Node* DeleteNode(Node* head,int n) // Delete node at position n
 {
     Node* temp1 = head;
     if (n==1){ // special case if first node wanted to be deleted
         head = temp1->next; // head now points the second node
         free(temp1);
-        return;
+        return head;
     }
     
     int i;
@@ -78,9 +79,27 @@ void DeleteNode(int n) // Delete node at position n
     Node* temp2 = temp1 -> next; // nth node
     temp1->next = temp2 -> next; // (n+1)th node
     free(temp2); // delete temp2
+    return head;
 }
 
-void Print()
+Node* ReverseNode(Node* head){ // Iterative method
+    Node *prev, *current, *next;
+    current = head;
+    prev = NULL; // prev node is a must while using iterative method
+    while (current != NULL)
+    {
+        next = current -> next;
+        current -> next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+    free(current);
+    free(next);
+    return head;
+}
+
+void Print(Node* head)
 {
     Node* temp = head; // if printing a global variable, a new declaration must be done here to prevent ruining the global variable
     std::cout << "The list is: ";
@@ -94,24 +113,19 @@ void Print()
 
 int main()
 {
-    head = NULL; // if root is defined as local variable, must be passed as referance to the related functions
-    InsertNodeAtNthPosition(2, 1); // List: 2
-    InsertNodeAtNthPosition(4, 2); // List: 2, 4
-    InsertNodeAtTheEnd(6);
-    InsertNodeAtTheEnd(5); // List: 2, 4, 6, 5
-    Print();
+    Node * head = NULL; // if root is defined as local variable, must be passed as referance to the related functions
+    head = InsertNodeAtNthPosition(head, 2, 1); // List: 2
+    Print(head);
+    head = InsertNodeAtNthPosition(head, 4, 2); // List: 2, 4
+    head = InsertNodeAtBeginning(head, 1);
+    head = InsertNodeAtTheEnd(head, 6);
+    head = InsertNodeAtTheEnd(head, 5); // List: 1, 2, 4, 6, 5
+    Print(head);
     int n;
     std::cout << "Enter a position: ";
     std::cin >> n;
-    DeleteNode(n);
-    Print();
-    /*std::cout << "\nHow many numbers? " << std::endl;
-    int n, x;
-    std::cin >> n;
-    for (int i = 0; i < n; i++)
-    {
-        std::cout << "Enter the number: ";
-        std::cin >> x;
-        head = InsertNodeAtBeginning(head, x);
-    }*/    
+    head = DeleteNode(head, n);
+    Print(head);
+    head = ReverseNode(head);
+    Print(head);
 }
