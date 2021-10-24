@@ -18,7 +18,7 @@ class Node {
         }
 };
 */
-//Node* head; // global variable, can be accessed anywhere
+Node* root; // global variable, can be accessed anywhere
 Node* InsertNodeAtBeginning(Node* head,int x) // defined return type, trying different implementations
 {
     Node* temp = new Node();
@@ -99,6 +99,20 @@ Node* ReverseNode(Node* head){ // Iterative method
     return head;
 }
 
+Node* ReverseNodeByRecursion(Node* r){
+    if (r == NULL){
+        return NULL;
+    }
+    if(r->next == NULL){
+        root = r;
+        return r;
+    }
+    Node* q = ReverseNodeByRecursion(r -> next);
+    q->next = r;
+    r->next = NULL;
+    return r;
+}
+
 void Print(Node* head)
 {
     Node* temp = head; // if printing a global variable, a new declaration must be done here to prevent ruining the global variable
@@ -128,6 +142,7 @@ void PrintReverseByRecursion(Node* r){
 
 int main()
 {
+    root = NULL;
     Node * head = NULL; // if root is defined as local variable, must be passed as referance to the related functions
     head = InsertNodeAtNthPosition(head, 2, 1); // List: 2
     Print(head);
@@ -145,5 +160,14 @@ int main()
     Print(head);
 
     PrintByRecursion(head);
-    PrintReverseByRecursion(head);
+    //PrintReverseByRecursion(head);
+    //ReverseNodeByRecursion(root);
+    //std::cout << "root: ";
+    //Print(root);
+    ReverseNodeByRecursion(head);
+    head = root;
+    free(root);
+    std::cout << "head: ";
+    Print(head);
+
 }
