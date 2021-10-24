@@ -118,15 +118,12 @@ void PrintByRecursion(Node* r){
     }
     std::cout << r->data << " ";
     PrintByRecursion(r->next); 
-    
 }
 
 void PrintReverseByRecursion(Node* r){
     if (r == NULL) return;
     PrintReverseByRecursion(r->next); 
     std::cout << r->data << " ";
-    
-    
 }
 
 int main()
