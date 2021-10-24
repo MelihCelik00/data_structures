@@ -111,6 +111,24 @@ void Print(Node* head)
     std::cout << "\n";
 }
 
+void PrintByRecursion(Node* r){
+    if (r == NULL){
+        std::cout << "\n";
+        return;
+    }
+    std::cout << r->data << " ";
+    PrintByRecursion(r->next); 
+    
+}
+
+void PrintReverseByRecursion(Node* r){
+    if (r == NULL) return;
+    PrintReverseByRecursion(r->next); 
+    std::cout << r->data << " ";
+    
+    
+}
+
 int main()
 {
     Node * head = NULL; // if root is defined as local variable, must be passed as referance to the related functions
@@ -128,4 +146,7 @@ int main()
     Print(head);
     head = ReverseNode(head);
     Print(head);
+
+    PrintByRecursion(head);
+    PrintReverseByRecursion(head);
 }
