@@ -33,6 +33,31 @@ DoublyLinkedListNode* InsertAtHead(DoublyLinkedListNode* head, int x){
     return head;
 }
 
+DoublyLinkedListNode* InsertAtNthPosition(DoublyLinkedListNode* head, int x, int pos){
+    DoublyLinkedListNode* newNode = GetNewNode(x);
+    if(head == NULL){
+        head = newNode;
+        return head;
+    }
+    else{
+        if (pos == 1){
+            head -> prev = newNode;
+            newNode -> next = head;
+            head = newNode;
+            return head;
+        }
+        DoublyLinkedListNode* newNode2 = head;
+        for (int i = 0; i < pos-2; i++)
+        {
+            newNode2 = newNode2 -> next;
+        }
+        newNode -> next = newNode2 -> next;
+        newNode -> prev = newNode2;
+        newNode2 -> next = newNode;
+        return head;
+    }
+}
+
 void Print(DoublyLinkedListNode* head){
     DoublyLinkedListNode* temp = head;
     std::cout << "Print forward: ";
